@@ -1,10 +1,14 @@
 #!/usr/bin/env ruby
+require 'drawille'
+require 'chunky_png'
+include ChunkyPNG
 
 require './lib/bicycle'
 require './lib/car'
 require './lib/road'
 require './lib/traffic_light'
 require './lib/vehicle'
+
 
 def getUserInput(message)
   while (true) do
@@ -17,9 +21,27 @@ def getUserInput(message)
   end
 end
 
+def draw(canvas, img, xoffset=0)
+  (0..img.dimension.width-1).each do |x|
+    (0..img.dimension.height-1).each do |y|
+      r = Color.r(img[x, y])
+      g = Color.g(img[x, y])
+      b = Color.b(img[x, y])
+      canvas.set(x+xoffset, y) if (r + b + g) > 100
+    end
+  end
+end
+
+def draw_file(pic_name)
+  canvas = Drawille::Canvas.new
+  draw canvas, Image.from_file("./img/#{pic_name}")
+  puts canvas.frame
+end
 
 traffic_light = TrafficLight.new
 road = Road.new(traffic_light)
+puts 'Traffic Light is created'
+draw_file('traffic-light.png')
 
 while true
   command = getUserInput('Choose action: ADD_VEHICLE or CHANGE_COLOR')
@@ -30,9 +52,11 @@ while true
         when 'CAR'
           name = getUserInput('Please enter name of car')
           vehicle = Car.new(name)
+          draw_file('car.png')
         when 'BICYCLE'
           name = getUserInput('Please enter name of bicycle')
           vehicle = Bicycle.new(name)
+          draw_file('man-cycling.png')
         else
           puts ('Wrong car type')
           next
@@ -47,4 +71,5 @@ while true
       puts('Wrong command, try again')
   end
   puts road.inspect
+
 end

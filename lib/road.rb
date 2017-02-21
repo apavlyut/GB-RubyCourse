@@ -1,6 +1,8 @@
+
 class Road
   attr_reader :vehicle_list
   attr_reader :traffic_light
+
 
   def initialize(traffic_light)
     @vehicle_list = []
