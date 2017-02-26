@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'drawille'
+require 'drawille' # ты поставила гемы и нужно было зависимости добавить в Gemfile потому как они у меня не установлены.
 require 'chunky_png'
 include ChunkyPNG
 
@@ -11,7 +11,7 @@ require './lib/vehicle'
 
 
 def getUserInput(message)
-  while (true) do
+  while (true) do # (true) скобки не обязательны. Когда мало агрументов для аккуратности опускай их
     puts(message)
     input = gets.strip!.chomp.upcase
     if !input.empty?

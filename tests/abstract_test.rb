@@ -1,5 +1,6 @@
 require 'test/unit'
 
+# Верная мысль, и поэтому для таких задач лучше использовать хелперы - распространять через модули и инклюдить где нужно, а не прибегать к наследованию.
 class AbstractTest < Test::Unit::TestCase
 
   def assert_vehicle(expected_name,

@@ -36,7 +36,6 @@ class Vehicle
       @motion = false
       puts "#{get_vehicle_name} stopped"
     end
-
   end
 
   def break!
